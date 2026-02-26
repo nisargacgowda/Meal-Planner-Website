@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEALTHY GRAMS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: black;
+            background-image: url('abtimage.jpeg'); /* Background Image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            overflow: hidden; /* Prevent scrolling */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Header Styling */
+        header {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: black;
+            padding: 10px 0;
+            width: 100%;
+            /* Semi-transparent background */
+            position: absolute;
+            top: 0;
+        }
+
+        /* Navigation Bar */
+        nav {
+            text-align: center;
+            
+            position: absolute;
+            top: 10%;
+            width: 100%;
+            padding: 5px 0;
+            font-weight: bolder;
+        }
+
+        nav a {
+            color: black;
+            padding: 8px 12px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bolder;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        /* Main Content */
+        .container {
+            width: 80%;
+            max-width: 800px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            top: 50px;
+        }
+
+        .content {
+            font-size: 1rem;
+            line-height: 1.4;
+            max-height: 60vh; /* Restrict content height */
+            overflow-y: auto; /* Scroll only if needed */
+        }
+
+        /* Left-align the bullet points */
+        .services {
+            text-align: left;
+            margin: 0 auto;
+            width: 90%;
+        }
+
+        .services ul {
+            padding-left: 20px;
+        }
+
+        /* Strong Highlights */
+        strong {
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+
+    <header>HEALTHY GRAMS</header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="mealplan.html">Meal Planner</a>
+        <a href="abt.html">About Us</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="container">
+        <h2>Welcome to Healthy Grams!</h2>
+        <section class="content">
+            <p>At <strong>HEALTHY GRAMS</strong>, we focus on holistic wellness, combining modern science with traditional wisdom. Whether it's fitness, nutrition, or mindfulness, we provide personalized plans tailored to you.</p>
+
+            <h3>Our Services</h3>
+            <div class="services">
+                <ul>
+                    <li><strong>Wellness Plans</strong> - Personalized programs for your health goals.</li>
+                    <li><strong>Nutrition Guidance</strong> - Expert meal plans and tips.</li>
+                    <li><strong>Mindfulness & Stress Relief</strong> - Techniques to stay balanced.</li>
+                </ul>
+            </div>
+
+            <h3>Join Us!</h3>
+            <p>Start your journey to a healthier life with us. <br> Have questions? <strong>Contact us</strong> anytime!</p>
+        </section>
+    </div>
+
+</body>
+</html>

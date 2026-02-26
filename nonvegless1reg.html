@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Plan Table with Recipe Modal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        /* Back Button */
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #04AA6D;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            position: absolute;
+            left: 20px;
+            top: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #037f54;
+        }
+
+        h1 {
+            text-align: center; /* Center the heading */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        img {
+            max-width: 250px;
+            height: auto;
+            border-radius: 8px;
+            margin: 5px;
+            cursor: pointer; /* Indicate that the image is clickable */
+        }
+        .image-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back Button -->
+    <a href="javascript:history.back()" class="back-button">← Back</a>
+
+    <h1>Meal Plan for the Day!</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Meal</th>
+                <th>Meal Name</th>
+                <th>Images</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Breakfast -->
+            <tr>
+                <td>Breakfast (380 calories)</td>
+                <td>1. Korean-Style Steamed Eggs<br>2. Egg Cups</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/med/1195648_miaal_06d09f86-a2a3-4979-83d3-1dde13753317.jpg" 
+                             alt="Korean-Style Steamed Eggs" 
+                             onclick="openModal('Korean-Style Steamed Eggs', '1. Beat eggs with salt and water.<br>2. Cook over low heat in a covered pot until set.<br>3. Garnish with chopped green onions and sesame oil.')">
+                        <img src="https://images.eatthismuch.com/med/955670_tabitharwheeler_242f0b6c-1fa3-44c4-a17b-e0ade063f2b5.jpg" 
+                             alt="Egg Cups" 
+                             onclick="openModal('Egg Cups', '1. Preheat oven to 180°C (350°F).<br>2. Line a muffin tin with ham slices.<br>3. Crack an egg into each cup, season, and bake for 12-15 minutes.')">
+                    </div>
+                </td>
+            </tr>
+    
+            <!-- Lunch -->
+            <tr>
+                <td>Lunch (630 calories)</td>
+                <td>1. Tarragon and Dijon Chicken Salad <br>2. Curry Tuna Salad</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/med/906141_Shamarie84_45449b24-cd70-4035-915f-c1515cf5e812.png" 
+                             alt="Tarragon and Dijon Chicken Salad" 
+                             onclick="openModal('Tarragon and Dijon Chicken Salad', '1. Mix shredded chicken with Dijon mustard, tarragon, and mayonnaise.<br>2. Serve over fresh greens or in a sandwich.')">
+                        <img src="https://images.eatthismuch.com/med/906829_Tahirah_Fo_Ferah_50599381-d623-474f-b8e8-8306ce7e2720.jpg" 
+                             alt="Curry Tuna Salad" 
+                             onclick="openModal('Curry Tuna Salad', '1. Mix canned tuna with curry powder, Greek yogurt, and diced apples.<br>2. Serve on whole grain bread or lettuce wraps.')">
+                    </div>
+                </td>
+            </tr>
+    
+            <!-- Dinner -->
+            <tr>
+                <td>Dinner(650 calories)</td>
+                <td>1. Blackened Catfish<br>2. Spinach, Lemon, and Shrimp Salad</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/med/955696_anji36_f7470f8b-9153-4117-a112-533f3074e2fe.jpg" 
+                             alt="Blackened Catfish" 
+                             onclick="openModal('Blackened Catfish', '1. Coat catfish fillets with Cajun seasoning.<br>2. Sear in a hot pan with butter until crispy and cooked through.')">
+                        <img src="https://images.eatthismuch.com/med/331862_simmyras_dea8afbe-4c41-4232-994c-7e7e90548a42.png" 
+                             alt="Spinach, Lemon, and Shrimp Salad" 
+                             onclick="openModal('Spinach, Lemon, and Shrimp Salad', '1. Toss fresh spinach with cooked shrimp and lemon vinaigrette.<br>2. Garnish with sliced almonds and parmesan cheese.')">
+                    </div>
+                </td>
+            </tr>
+    
+            <!-- Snack -->
+            <tr>
+                <td>Snack(180 calories)</td>
+                <td>1. Peach and Strawberry Smoothie</td>
+                <td>
+                    <img src="https://images.eatthismuch.com/med/412941_tabitharwheeler_303958db-8e3f-4f42-b64e-d69a58ff9fcf.jpg" 
+                         alt="Peach and Strawberry Smoothie" 
+                         onclick="openModal('Peach and Strawberry Smoothie', '1. Blend peaches, strawberries, and yogurt until smooth.<br>2. Serve chilled with ice cubes.')">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+
+    <!-- Modal -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Recipe Title</h2>
+            <p id="modalContent">Recipe details will appear here.</p>
+        </div>
+    </div>
+
+    <script>
+        function openModal(title, content) {
+            document.getElementById('modalTitle').innerHTML = title;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('recipeModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('recipeModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('recipeModal')) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

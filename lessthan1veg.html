@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Plan Table with Recipe Modal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .back-button, .regenerate-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #04AA6D;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            position: absolute;
+            top: 20px;
+        }
+
+        .back-button { left: 20px; }
+        .regenerate-button { right: 20px; }
+
+        .back-button:hover, .regenerate-button:hover {
+            background-color: #037f54;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        img {
+            max-width: 250px;
+            height: auto;
+            border-radius: 8px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .image-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 5px 0;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="javascript:history.back()" class="back-button">← Back</a>
+    <a href="lessthan1vegreg.html" class="regenerate-button">Regenerate</a>
+
+    <h1>Meal Plan for the Day!</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Meal</th>
+                <th>Meal Name</th>
+                <th>Images</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Breakfast -->
+            <tr>
+                <td>Breakfast (550 calories)</td>
+                <td>1. Vegan Mushroom-Cashew Toast<br>2. Vegan French Toast</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/med/906218_tabitharwheeler_ffd40034-9040-49fc-b13a-b7b9137815a0.jpg" 
+                             alt="Vegan Mushroom-Cashew Toast" 
+                             onclick="openModal('Vegan Mushroom-Cashew Toast', '1. Sauté mushrooms with garlic in olive oil.<br>2. Blend cashews with lemon juice, salt, and a little water.<br>3. Spread the cashew cream on toast and top with mushrooms.')">
+                        <img src="https://images.eatthismuch.com/med/34842_tabitharwheeler_cd4a1779-5b33-409a-b238-e06146571798.jpg" 
+                             alt="Vegan French Toast" 
+                             onclick="openModal('Vegan French Toast', '1. Mix plant-based milk, chickpea flour, cinnamon, and vanilla.<br>2. Dip bread slices in the mixture and cook until golden brown.<br>3. Serve with maple syrup and fresh fruit.')">
+                    </div>
+                </td>
+            </tr>
+    
+            <!-- Lunch -->
+            <tr>
+                <td>Lunch (550 calories)</td>
+                <td>1. Mango Smoothie <br>2. Peanut Butter and Banana Toast</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/med/927279_tabitharwheeler_0429baa1-435d-4689-b5f9-382a6040fe09.jpg" 
+                             alt="Mango Smoothie" 
+                             onclick="openModal('Mango Smoothie', '1. Blend mango chunks, banana, and almond milk until smooth.<br>2. Add ice cubes and blend again for a chilled drink.')">
+                        <img src="https://images.eatthismuch.com/med/1014207_tabitharwheeler_432e5d0b-70a1-480d-b983-4c403dcc13b3.jpg" 
+                             alt="Peanut Butter and Banana Toast" 
+                             onclick="openModal('Peanut Butter and Banana Toast', '1. Spread peanut butter on whole-grain toast.<br>2. Top with banana slices and sprinkle with chia seeds.')">
+                    </div>
+                </td>
+            </tr>
+    
+            <!-- Dinner -->
+            <tr>
+                <td>Dinner (430 calories)</td>
+                <td>1. Tofu Dengaku<br>2. Cauliflower Fried Rice</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/med/56910_erin_m_205a5128-496b-4c1e-bb2b-92db8db20a57.png" 
+                             alt="Tofu Dengaku" 
+                             onclick="openModal('Tofu Dengaku', '1. Grill tofu slices until golden.<br>2. Spread miso glaze (miso paste, mirin, and sugar) on top and broil for 2-3 minutes.<br>3. Garnish with sesame seeds.')">
+                        <img src="https://images.eatthismuch.com/med/347029_wannaBfit_6b017e84-2f24-4856-bf58-c4a164b4cc74.png" 
+                             alt="Cauliflower Fried Rice" 
+                             onclick="openModal('Cauliflower Fried Rice', '1. Pulse cauliflower in a food processor until rice-sized.<br>2. Stir-fry with garlic, onions, and your favorite vegetables.<br>3. Season with soy sauce and garnish with green onions.')">
+                    </div>
+                </td>
+            </tr>
+            <!-- Snacks -->
+<tr>
+    <td>Snack (150 calories)</td>
+    <td>1. PB & Dates Energy Bites</td>
+    <td>
+        <img src="https://images.eatthismuch.com/med/294591_rsgc_34d1f69b-3427-46ef-a036-cc1cd1b12630.png" 
+             alt="PB & Dates Energy Bites" 
+             onclick="openModal('PB & Dates Energy Bites', '1. Blend dates, peanut butter, and oats until smooth.<br>2. Roll the mixture into small bite-sized balls.<br>3. Chill in the fridge for 30 minutes before serving.')">
+    </td>
+</tr>
+
+        </tbody>
+    </table>
+    
+    <!-- Modal -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Recipe Title</h2>
+            <p id="modalContent">Recipe details will appear here.</p>
+        </div>
+    </div>
+
+    <script>
+        function openModal(title, content) {
+            document.getElementById('modalTitle').innerHTML = title;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('recipeModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('recipeModal').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>

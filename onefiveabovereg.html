@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Plan Table with Recipe Modal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .back-button:hover {
+            background-color: darkgreen;
+        }
+        h1 {
+            margin-top: 50px;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        img {
+            max-width: 250px;
+            height: auto;
+            border-radius: 8px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .image-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="back-button" onclick="goBack()">Back</button>
+    <h1>Meal Plan for the Day!</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Meal</th>
+                <th>Meal Name</th>
+                <th>Images</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Breakfast -->
+            <tr>
+                <td>Breakfast</td>
+                <td>1. Oatmeal with Apple and Banana<br>2. Peach and Peanut Butter Snack</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/img/343419_frida2104_9fd6a0ae-de93-4daf-8fa8-eba360840e2a.png" alt="Oatmeal with Apple and Banana" onclick="openModal('Oatmeal with Apple and Banana', '1. Cook oatmeal according to package instructions.<br>2. Top with sliced apples and banana.<br>3. Add a drizzle of honey or sprinkle of cinnamon if desired.')">
+                        <img src="https://images.eatthismuch.com/img/906934_Jay_skyler_37b47e83-c4b2-4217-aa20-8e0cd823760c.jpg" alt="Peach and Peanut Butter Snack" onclick="openModal('Peach and Peanut Butter Snack', '1. Slice peaches.<br>2. Spread peanut butter on each slice.<br>3. Serve as a quick and satisfying snack.')">
+                    </div>
+                </td>
+            </tr>
+
+            <!-- Lunch -->
+            <tr>
+                <td>Lunch</td>
+                <td>1. Quick Nori Roll with Cucumber and Avocado<br>2. Peach Caprese Salad</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/img/331920_mabeloheca_9eb43396-9f7e-4b9f-9856-40b00cc94aca.png" alt="Quick Nori Roll with Cucumber and Avocado" onclick="openModal('Quick Nori Roll with Cucumber and Avocado', '1. Place a sheet of nori on a sushi mat.<br>2. Spread a thin layer of rice.<br>3. Add thin slices of cucumber and avocado.<br>4. Roll tightly and slice into pieces.<br>5. Serve with soy sauce or pickled ginger.')">
+                        <img src="https://images.eatthismuch.com/img/334573_notcontinuum_337ce5f0-e7da-4d85-949a-06bee47bf229.png" alt="Peach Caprese Salad" onclick="openModal('Peach Caprese Salad', '1. Slice peaches and fresh mozzarella.<br>2. Arrange on a plate with fresh basil leaves.<br>3. Drizzle with balsamic glaze.<br>4. Season with salt and pepper to taste.')">
+                    </div>
+                </td>
+            </tr>
+
+            <!-- Dinner -->
+            <tr>
+                <td>Dinner</td>
+                <td>1. Quinoa Spinach Salad with Lemon Vinaigrette<br>2. Brussels Sprout Slaw</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/img/1501581_AnnieEddie_993e310e-ee24-41b8-8a55-8b664e395933.jpg" alt="Quinoa Spinach Salad with Lemon Vinaigrette" onclick="openModal('Quinoa Spinach Salad with Lemon Vinaigrette', '1. Cook quinoa according to package instructions.<br>2. Toss with fresh spinach, cherry tomatoes, and a lemon vinaigrette.<br>3. Serve chilled or at room temperature.')">
+                        <img src="https://images.eatthismuch.com/img/45366_erin_m_0a24fca0-243d-4b46-bc28-1a41f3e29bdf.png" alt="Brussels Sprout Slaw" onclick="openModal('Brussels Sprout Slaw', '1. Shred Brussels sprouts using a food processor.<br>2. Toss with a light vinaigrette and your choice of nuts or seeds.<br>3. Serve chilled or at room temperature.')">
+                    </div>
+                </td>
+            </tr>
+
+            <!-- Snack -->
+            <tr>
+                <td>Snack</td>
+                <td>Honey Strawberry Smoothie</td>
+                <td>
+                    <img src="https://images.eatthismuch.com/img/320077_pinku_5cf18b4c-762f-4c89-b07b-3afd5eac6dea.png" alt="Honey Strawberry Smoothie" onclick="openModal('Honey Strawberry Smoothie', '1. Blend fresh strawberries with a splash of honey and a bit of yogurt or almond milk.<br>2. Serve chilled for a refreshing snack.')">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function openModal(title, content) {
+            document.getElementById('modalTitle').innerHTML = title;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('recipeModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('recipeModal').style.display = 'none';
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+</body>
+</html>

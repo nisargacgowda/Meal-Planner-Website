@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Plan Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        img {
+            max-width: 250px;
+            height: auto;
+            border-radius: 8px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .image-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .back-button {
+            font-size: 18px;
+            color: #fff;
+            background-color: #28a745;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .back-button:hover {
+            background-color: #218838;
+        }
+        .regenerate-button {
+            font-size: 16px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .regenerate-button a {
+            color: white;
+            text-decoration: none;
+        }
+        .regenerate-button:hover {
+            background-color: #218838;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="#" class="back-button" onclick="window.history.back();">← Back</a>
+        <button class="regenerate-button"><a href="onefiveabovereg.html">REGENERATE</a></button>
+    </div>
+
+    <h1>Meal Plan for the Day!</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Meal</th>
+                <th>Meal Name</th>
+                <th>Images</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Breakfast</td>
+                <td>1. Spinach, Swiss, and Egg White Omelet <br> 2. Apples and Almond Butter</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/img/906792_tabitharwheeler_7ecdcbb2-52e2-456d-8c38-4194febe4830.jpg" alt="Spinach, Swiss, and Egg White Omelet" onclick="openModal('1. Sauté chopped onions and spinach in olive oil until tender.<br>2. Whisk 4 egg whites with salt and pepper.<br>3. Pour egg whites into a non-stick skillet and cook until edges set.<br>4. Add cooked vegetables and shredded Swiss cheese to one half of the omelet.<br>5. Fold the omelet over and cook until fully set and cheese melts.')">
+                        <img src="https://images.eatthismuch.com/img/55276_erin_m_7c06a10c-7070-49bd-ae36-b5a913f4aaf9.png" alt="Apples and Almond Butter" onclick="openModal('1. Slice apples.<br>2. Serve with almond butter for dipping.')">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Lunch</td>
+                <td>1. Green Ginger Berry Smoothie <br> 2. Yogurt with Matcha & Toasted Coconut</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/img/413011_simmyras_9c6a8f66-8950-4ec4-9e33-ffef9eed7662.png" alt="Green Ginger Berry Smoothie" onclick="openModal('1. Blend spinach, berries, banana, and ginger with water or almond milk.<br>2. Serve chilled.')">
+                        <img src="https://images.eatthismuch.com/img/3266375_elm333_15613a6b-1369-4d16-8764-436f89bc613a.jpg" alt="Yogurt with Matcha & Toasted Coconut" onclick="openModal('1. Mix yogurt with matcha powder.<br>2. Top with toasted coconut flakes.<br>3. Serve chilled.')">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Dinner</td>
+                <td>1. Mushroom and Soba Miso Soup <br> 2. Sundried Tomato and Avocado Chopped Salad</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/img/963113_ModernEel_eec22078-30d6-4ea0-8799-763235d0bedc.png" alt="Mushroom and Soba Miso Soup" onclick="openModal('1. Cook soba noodles according to package instructions.<br>2. Sauté mushrooms and add to a pot with miso broth.<br>3. Add cooked noodles and cook until heated through.<br>4. Serve hot.')">
+                        <img src="https://images.eatthismuch.com/img/3268378_16csherman_7e3412d3-fc5d-4f34-ab2a-4cab990d50f3.jpg" alt="Sundried Tomato and Avocado Chopped Salad" onclick="openModal('1. Chop sundried tomatoes and avocado.<br>2. Mix with lettuce and your favorite dressing.<br>3. Serve immediately.')">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Snack</td>
+                <td>1. Vegan Cinnamon Date "Caramel" & Apples</td>
+                <td>
+                    <img src="https://images.eatthismuch.com/img/906724_tabitharwheeler_4304013e-ff51-47d0-967d-11552b0597fc.jpg" alt="Vegan Cinnamon Date 'Caramel' & Apples" onclick="openModal('Vegan Cinnamon Date Caramel & Apples', '1. Blend dates with cinnamon to create a caramel-like spread.<br>2. Slice apples and serve with the date caramel.')">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p id="modalContent"></p>
+        </div>
+    </div>
+
+    <script>
+        function openModal(content) {
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('recipeModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('recipeModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('recipeModal')) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

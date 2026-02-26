@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Plan Table with Recipe Modal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        img {
+            max-width: 250px;
+            height: auto;
+            border-radius: 8px;
+            margin: 5px;
+            cursor: pointer; /* Indicate that the image is clickable */
+        }
+        .image-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Back button and header styling */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .back-button {
+            font-size: 18px;
+            color: #fff;
+            background-color: #28a745; /* Green color */
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .back-button:hover {
+            background-color: #218838; /* Darker green when hovered */
+        }
+        .meal-title {
+            font-size: 24px;
+            text-align: center;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="#" class="back-button" onclick="window.history.back();">←Back</a>
+        <div class="meal-title">Meal Plan for the Day!</div>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Meal</th>
+                <th>Meal Name</th>
+                <th>Images</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Breakfast</td>
+                <td>1. Avocado & Tomato Toast<br>2. Granola</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/img/3251832_elm333_883a5088-6113-4ff1-acfb-9e2905056566.jpg" alt="Avocado & Tomato Toast" onclick="openModal('Avocado & Tomato Toast', '1. Toast whole-grain bread.<br>2. Mash avocado and spread on toast.<br>3. Top with sliced tomatoes and a pinch of salt.<br>4. Serve immediately.')">
+                        <img src="https://images.eatthismuch.com/img/473426_basic_bob_9690cd24-cefa-451b-825a-ff220a9254a0.png" alt="Granola" onclick="openModal('Granola', '1. Mix oats, nuts, and seeds.<br>2. Add honey and bake until golden.<br>3. Let cool and serve with milk or yogurt.')">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Lunch</td>
+                <td>1. Grown-Up PB&J Toast<br>2. Strawberry and Walnut Spinach Salad</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/img/1343617_NevineBaligh_a7e4073d-ab9b-469d-9ace-c248d133996a.jpg" alt="Grown-Up PB&J Toast" onclick="openModal('Grown-Up PB&J Toast', '1. Spread peanut butter on whole-grain toast.<br>2. Top with a layer of high-quality fruit jam.<br>3. Add sliced banana or chia seeds if desired.<br>4. Serve immediately.')">
+                        <img src="https://images.eatthismuch.com/img/3266487_Elisa_9d4609cc-39b7-44fe-b5ea-e1b06265bf0c.jpg" alt="Strawberry and Walnut Spinach Salad" onclick="openModal('Strawberry and Walnut Spinach Salad', '1. Toss fresh spinach with sliced strawberries and walnuts.<br>2. Drizzle with a balsamic vinaigrette.<br>3. Serve chilled.')">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Dinner</td>
+                <td>1. Creamy Asparagus Pasta<br>2. Zesty Honey Kale</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/img/45584_tabitharwheeler_01b0b345-9139-4e6f-9780-055597436a4f.jpg" alt="Creamy Asparagus Pasta" onclick="openModal('Creamy Asparagus Pasta', '1. Cook pasta according to package instructions.<br>2. Sauté asparagus in olive oil.<br>3. Toss pasta with asparagus and a creamy sauce.<br>4. Serve warm.')">
+                        <img src="https://images.eatthismuch.com/img/3266439_kimberlye727_43531adb-d288-451b-a83a-55a7e905aae4.jpeg" alt="Zesty Honey Kale" onclick="openModal('Zesty Honey Kale', '1. Massage kale leaves with a honey-lemon dressing.<br>2. Add your favorite toppings such as nuts or cheese.<br>3. Serve immediately or chill.')">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Snack</td>
+                <td>1. Tropical Smoothie</td>
+                <td>
+                    <img src="https://images.eatthismuch.com/img/905577_simmyras_7a72b2cf-cbeb-4242-96b1-5f5488729874.png" alt="Tropical Smoothie" onclick="openModal('Tropical Smoothie', '1. Blend tropical fruits like pineapple, mango, and banana.<br>2. Add a splash of coconut milk.<br>3. Serve chilled.')">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Recipe Title</h2>
+            <p id="modalContent">Recipe details will appear here.</p>
+        </div>
+    </div>
+
+    <script>
+        function openModal(title, content) {
+            document.getElementById('modalTitle').innerHTML = title;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('recipeModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('recipeModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('recipeModal')) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

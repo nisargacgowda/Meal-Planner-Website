@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Plan Table with Recipe Modal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Back Button (Top Left) */
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #04AA6D;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            position: absolute;
+            left: 20px;
+            top: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #037f54;
+        }
+
+        /* Regenerate Button (Top Right) */
+        .regenerate-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color:#04AA6D ;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+
+        .regenerate-button:hover {
+            background-color: #037f54;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        img {
+            max-width: 250px;
+            height: auto;
+            border-radius: 8px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .image-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 800px;
+            text-align: left;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 5px 0;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Back Button (Top Left) -->
+    <a href="javascript:history.back()" class="back-button">← Back</a>
+
+    <!-- Regenerate Button (Top Right) -->
+    <a href="15abovevegreg.html" class="regenerate-button">Regenerate</a>
+
+    <h1>Meal Plan for the Day!</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Meal</th>
+                <th>Meal Name</th>
+                <th>Images</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Breakfast -->
+            <tr>
+                <td>Breakfast (450 calories)</td>
+                <td>1. Peanut Butter & Banana Oatmeal<br>2. Vegan Savory Oatmeal</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/med/413007_cyberchristie_f063e2da-91d9-4962-9123-2d6c710600aa.png" 
+                             alt="Peanut Butter & Banana Oatmeal" 
+                             onclick="openModal('Peanut Butter & Banana Oatmeal', '1. Cook oats in water or milk.<br>2. Stir in peanut butter and sliced bananas.<br>3. Serve warm.')">
+                        <img src="https://images.eatthismuch.com/med/1140030_Bluette_a794f5bc-d672-43fb-8e34-0cc77bc35046.jpeg" 
+                             alt="Vegan Savory Oatmeal" 
+                             onclick="openModal('Vegan Savory Oatmeal', '1. Cook oats with vegetable broth.<br>2. Add sautéed onions, mushrooms, and spinach.<br>3. Top with nutritional yeast and serve.')">
+                    </div>
+                </td>
+            </tr>
+
+            <!-- Lunch -->
+            <tr>
+                <td>Lunch (570 calories)</td>
+                <td>1. Vegan Mexican Tortilla Roll Ups <br>2. Summer Pepper and Tomato Salad</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/med/1225076_Frabjous_b841a7b1-7ee5-4508-959f-ad5cec9f3f42.jpg" 
+                             alt="Vegan Mexican Tortilla Roll Ups" 
+                             onclick="openModal('Vegan Mexican Tortilla Roll Ups', '1. Spread hummus on a tortilla.<br>2. Add diced bell peppers, avocado, and spinach.<br>3. Roll up and slice.')">
+                        <img src="https://images.eatthismuch.com/med/905579_Shamarie84_b12fc1a7-77fb-43fa-b5a8-813557a8f2bf.png" 
+                             alt="Summer Pepper and Tomato Salad" 
+                             onclick="openModal('Summer Pepper and Tomato Salad', '1. Chop bell peppers and tomatoes.<br>2. Toss with olive oil, lemon juice, and herbs.<br>3. Serve chilled.')">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Dinner (850 calories)</td>
+                <td>1. Veggie Spaghetti with Potato Sauce<br>2. Pasta la Checca</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/med/381252_dorisloor_64016d85-9154-41ed-a9c2-ae3434b07fa4.png" 
+                             alt="Veggie Spaghetti with Potato Sauce" 
+                             onclick="openModal('Veggie Spaghetti with Potato Sauce', '1. Boil spaghetti and drain.<br>2. Blend cooked potatoes with garlic and seasonings to make a sauce.<br>3. Mix sauce with spaghetti and serve.')">
+                        <img src="https://images.eatthismuch.com/med/45109_tabitharwheeler_4f1bbce5-66f8-412b-9302-625f360571f9.jpg" 
+                             alt="Pasta la Checca" 
+                             onclick="openModal('Pasta la Checca', '1. Cook pasta and drain.<br>2. Toss with diced tomatoes, basil, olive oil, and mozzarella cheese.<br>3. Serve fresh.')">
+                    </div>
+                </td>
+            </tr>
+            
+            <!-- Snack -->
+            <tr>
+                <td>Snack (180 calories)</td>
+                <td>1. Tropical Mint Smoothie</td>
+                <td>
+                    <img src="https://images.eatthismuch.com/med/221252_scotjohns_2744e0e0-2e0c-42ba-9281-3691c0d488eb.png" 
+                         alt="Tropical Mint Smoothie" 
+                         onclick="openModal('Tropical Mint Smoothie', '1. Blend mango, pineapple, mint leaves, and coconut water.<br>2. Serve chilled.')">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- Modal -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Recipe Title</h2>
+            <p id="modalContent">Recipe details will appear here.</p>
+        </div>
+    </div>
+
+    <script>
+        function openModal(title, content) {
+            document.getElementById('modalTitle').innerHTML = title;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('recipeModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('recipeModal').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>

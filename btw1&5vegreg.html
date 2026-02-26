@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Plan Table with Recipe Modal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .back-button:hover {
+            background-color: darkgreen;
+        }
+        h1 {
+            margin-top: 50px;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        img {
+            max-width: 250px;
+            height: auto;
+            border-radius: 8px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .image-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            text-align: left;
+            border-radius: 10px;
+            position: relative;
+        }
+        .close {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="back-button" onclick="goBack()">Back</button>
+    <h1>Meal Plan for the Day!</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Meal</th>
+                <th>Meal Name</th>
+                <th>Images</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Breakfast -->
+            <!-- Breakfast -->
+<tr>
+    <td>Breakfast(430 calories)</td>
+    <td>1. Crispy Hash Browns<br>2. Spanish-style Toast with Tomato</td>
+    <td>
+        <div class="image-group">
+            <img src="https://images.eatthismuch.com/med/1267638_L0lie_6642e376-c444-41f6-b670-73ebe6270248.jpg" 
+                 alt="Crispy Hash Browns" 
+                 onclick="openModal('Crispy Hash Browns', '1. Grate potatoes and squeeze out excess moisture.<br>2. Heat oil in a pan and spread potatoes evenly.<br>3. Cook until golden brown on both sides.')">
+            
+            <img src="https://images.eatthismuch.com/med/906918_zearawn_7c0e7bdb-46dd-4f43-9896-c9682806e723.jpg" 
+                 alt="Spanish-style Toast with Tomato" 
+                 onclick="openModal('Spanish-style Toast with Tomato', '1. Toast bread slices until crispy.<br>2. Rub garlic and tomato on the toast.<br>3. Drizzle with olive oil and sprinkle with salt.')">
+        </div>
+    </td>
+</tr>
+
+<!-- Lunch -->
+<tr>
+    <td>Lunch(450 calories)</td>
+    <td>1. Tomato and Radish Salad<br>2. Kiwi Berry Smoothie</td>
+    <td>
+        <div class="image-group">
+            <img src="https://images.eatthismuch.com/med/3268405_southcalioc_6bab4635-34c3-412f-a19d-cb0c7629d814.jpeg" 
+                 alt="Tomato and Radish Salad" 
+                 onclick="openModal('Tomato and Radish Salad', '1. Slice tomatoes and radishes.<br>2. Toss with olive oil, vinegar, salt, and pepper.<br>3. Garnish with fresh herbs and serve.')">
+            
+            <img src="https://images.eatthismuch.com/med/287125_AlinaDeAlmeida_fbdc0f8d-f261-408e-b849-e38b2c7f38bf.png" 
+                 alt="Kiwi Berry Smoothie" 
+                 onclick="openModal('Kiwi Berry Smoothie', '1. Blend kiwi, mixed berries, and yogurt.<br>2. Add honey and ice cubes.<br>3. Blend until smooth and serve chilled.')">
+        </div>
+    </td>
+</tr>
+
+<!-- Dinner -->
+<tr>
+    <td>Dinner(800 calories)</td>
+    <td>1. Easy Olive Oil, Tomato, and Basil Pasta<br>2. Tempeh Strips with Almond Sauce</td>
+    <td>
+        <div class="image-group">
+            <img src="https://images.eatthismuch.com/med/45256_erin_m_194bb3ad-c126-4b71-a617-52aab09e6196.png" 
+                 alt="Easy Olive Oil, Tomato, and Basil Pasta" 
+                 onclick="openModal('Easy Olive Oil, Tomato, and Basil Pasta', '1. Cook pasta and drain.<br>2. Sauté garlic in olive oil and add tomatoes.<br>3. Mix with pasta, add basil, and serve with Parmesan.')">
+            
+            <img src="https://images.eatthismuch.com/med/208123_tabitharwheeler_df3090b6-406a-4d1a-b24d-d679953441ac.jpg" 
+                 alt="Tempeh Strips with Almond Sauce" 
+                 onclick="openModal('Tempeh Strips with Almond Sauce', '1. Slice tempeh and pan-fry until golden.<br>2. Blend almonds, garlic, and olive oil into a sauce.<br>3. Serve tempeh with the almond sauce.')">
+        </div>
+    </td>
+</tr>
+
+<!-- Snack -->
+<tr>
+    <td>Snack(200 calories)</td>
+    <td>Pumpkin Coconut Paleo Smoothie</td>
+    <td>
+        <img src="https://images.eatthismuch.com/med/255178_tabitharwheeler_b6752f31-8c72-4fcd-88d4-be04a3d45477.jpg" 
+             alt="Pumpkin Coconut Paleo Smoothie" 
+             onclick="openModal('Pumpkin Coconut Paleo Smoothie', '1. Blend pumpkin puree with coconut milk, cinnamon, and honey.<br>2. Add ice and blend until smooth.<br>3. Serve chilled.')">
+    </td>
+</tr>
+
+
+        </tbody>
+    </table>
+
+    <!-- Recipe Modal -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
+        </div>
+    </div>
+
+    <script>
+        function openModal(title, content) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('recipeModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('recipeModal').style.display = 'none';
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            var modal = document.getElementById('recipeModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+    </script>
+
+</body>
+</html>

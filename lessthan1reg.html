@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Plan Table with Recipe Modal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        /* Back Button */
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #04AA6D;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            position: absolute;
+            left: 20px;
+            top: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #037f54;
+        }
+
+        h1 {
+            text-align: center; /* Center the heading */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        img {
+            max-width: 250px;
+            height: auto;
+            border-radius: 8px;
+            margin: 5px;
+            cursor: pointer; /* Indicate that the image is clickable */
+        }
+        .image-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back Button -->
+    <a href="javascript:history.back()" class="back-button">← Back</a>
+
+    <h1>Meal Plan for the Day!</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Meal</th>
+                <th>Meal Name</th>
+                <th>Images</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Breakfast</td>
+                <td>1.Gluten Free Banana Egg Pancake<br>
+                    2. Cantaloupe</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/img/211293_BluetteSteel_54895c5a-6f37-4a34-8210-c305952f90f3.png" alt="Gluten Free Banana Egg Pancake" onclick="openModal('Gluten Free Banana Egg Pancake', '1. Mash 2 ripe bananas.<br>2. Mix with 2 beaten eggs.<br>3. Pour batter onto a hot non-stick skillet.<br>4. Cook until bubbles form and then flip.<br>5. Serve with fresh cantaloupe slices.')">
+                        <img src="https://images.eatthismuch.com/img/475134_basic_bob_0fd991f1-bf35-48f4-a6df-c1e1be75a24c.png" alt="Cantaloupe" onclick="openModal('Cantaloupe', '1. Cut cantaloupe into slices.<br>2. Serve fresh.<br>3. Optionally, chill before serving.')">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Lunch</td>
+                <td>1.Peach and Strawberry Smoothie <br>
+                    2. Fruit Salad</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/img/412941_tabitharwheeler_303958db-8e3f-4f42-b64e-d69a58ff9fcf.jpg" alt="Peach and Strawberry Smoothie" onclick="openModal('Peach and Strawberry Smoothie', '1. Blend peaches, strawberries, and a splash of almond milk.<br>2. Serve chilled.')">
+                        <img src="https://images.eatthismuch.com/img/33484_einabq_73087f77-18a4-4153-9160-d3c8f0a7dc30.jpg" alt="Fruit Salad" onclick="openModal('Fruit Salad', '1. Chop a variety of fruits like apples, oranges, and grapes.<br>2. Toss together.<br>3. Serve chilled or at room temperature.')">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Dinner</td>
+                <td>1.Angelic Pasta <br>
+                    2.Microwaved Sweet Potato</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/img/963113_ModernEel_eec22078-30d6-4ea0-8799-763235d0bedc.png" alt="Angelic Pasta" onclick="openModal('Angelic Pasta', '1. Cook pasta according to package instructions.<br>2. Toss with olive oil, garlic, and your favorite vegetables.<br>3. Serve warm.')">
+                        <img src="https://images.eatthismuch.com/img/42621_elm333_b5bc89d3-32a1-4505-a38b-926d3a09777c.jpg" alt="Microwaved Sweet Potato" onclick="openModal('Microwaved Sweet Potato', '1. Pierce sweet potato with a fork.<br>2. Microwave on high for 5-7 minutes until tender.<br>3. Serve with a sprinkle of cinnamon or a pat of butter.')">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Snack</td>
+                <td>1.Hummus Chickpea Snack Sandwiches</td>
+                <td>
+                    <img src="https://images.eatthismuch.com/img/332339_simmyras_c8f3a976-9410-4718-80bd-7d63de0cc2a7.png" alt="Hummus Chickpea Snack Sandwiches" onclick="openModal('Hummus Chickpea Snack Sandwiches', '1. Mash chickpeas with hummus and your favorite seasonings.<br>2. Spread mixture onto whole grain bread.<br>3. Add lettuce or other veggies if desired.<br>4. Cut into sandwiches and serve.')">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Recipe Title</h2>
+            <p id="modalContent">Recipe details will appear here.</p>
+        </div>
+    </div>
+
+    <script>
+        function openModal(title, content) {
+            document.getElementById('modalTitle').innerHTML = title;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('recipeModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('recipeModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('recipeModal')) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

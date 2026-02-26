@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Intake Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 10px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #45a049;
+        }
+        form {
+            max-width: 1000px;
+            margin: auto;
+            background-image: url("https://i.pinimg.com/474x/ad/49/03/ad4903fbaa98df05e0f76f34ca382652.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding: 100px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            text-align: center;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Meal Preference Selection */
+        .meal-selection {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .meal-option {
+            width: 150px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            background-color: white;
+            transition: background-color 0.3s ease;
+        }
+        .meal-option:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .selected {
+            background-color: #4CAF50 !important;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Back Button -->
+    <button class="back-button" onclick="goBack()">Back</button>
+
+    <h2>KNOW YOUR MEAL!!</h2>
+
+    <!-- Meal Preference Selection -->
+    <div class="meal-selection">
+        <div class="meal-option" onclick="selectMeal('Vegetarian')">Vegetarian</div>
+        <div class="meal-option" onclick="selectMeal('Non-Vegetarian')">Non-Vegetarian</div>
+        <div class="meal-option" onclick="selectMeal('Anything')">Anything</div>
+    </div>
+
+    <form id="calorieForm">
+        <label for="fname">Name:</label>
+        <input type="text" id="fname" name="fname" placeholder="Enter your name" required>
+        
+        <label for="calories">Calories Required:</label>
+        <input type="text" id="calories" name="calories" placeholder="Enter your calories in the range(<1k,1-1.5k,>1.5k)" required>
+        
+        <label for="email">Enter your email id:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        let selectedMeal = ""; // Store selected meal preference
+
+        function goBack() {
+            window.history.back();
+        }
+
+        function selectMeal(mealType) {
+            selectedMeal = mealType; // Store selected meal type
+            document.querySelectorAll(".meal-option").forEach(div => div.classList.remove("selected"));
+            document.querySelector(`.meal-option[onclick="selectMeal('${mealType}')"]`).classList.add("selected");
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('calorieForm');
+            
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent actual form submission
+
+                const calorieInput = document.getElementById('calories').value;
+                const calorieIntake = parseInt(calorieInput, 10);
+
+                if (!selectedMeal) {
+                    alert("Please select a meal preference!");
+                    return;
+                }
+
+                if (isNaN(calorieIntake)) {
+                    alert('Please enter a valid number for calories.');
+                    return;
+                }
+
+                let targetPage = '';
+
+                // Determine page based on calories and meal preference
+                if (calorieIntake < 1000) {
+                    if (selectedMeal === "Vegetarian") targetPage = 'lessthan1veg.html';
+                    else if (selectedMeal === "Non-Vegetarian") targetPage = 'nonvegless1.html';
+                    else targetPage = 'lessthan1.html';
+                } 
+                else if (calorieIntake >= 1000 && calorieIntake <= 1500) {
+                    if (selectedMeal === "Vegetarian") targetPage = 'btw1&5veg.html';
+                    else if (selectedMeal === "Non-Vegetarian") targetPage = 'nonvegbtw1&5.html';
+                    else targetPage = 'btw1&5.html';
+                } 
+                else {
+                    if (selectedMeal === "Vegetarian") targetPage = '15aboveveg.html';
+                    else if (selectedMeal === "Non-Vegetarian") targetPage = 'nonveg15above.html';
+                    else targetPage = 'onefiveabove.html';
+                }
+
+                window.location.href = targetPage;
+            });
+        });
+    </script>
+
+</body>
+</html>

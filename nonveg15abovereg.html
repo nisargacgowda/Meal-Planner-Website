@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Plan Table with Recipe Modal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .back-button:hover {
+            background-color: darkgreen;
+        }
+        h1 {
+            margin-top: 50px;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        img {
+            max-width: 250px;
+            height: auto;
+            border-radius: 8px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .image-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            text-align: left;
+            border-radius: 10px;
+            position: relative;
+        }
+        .close {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="back-button" onclick="goBack()">Back</button>
+    <h1>Meal Plan for the Day!</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Meal</th>
+                <th>Meal Name</th>
+                <th>Images</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Breakfast -->
+            <tr>
+                <td>Breakfast(400 calories)</td>
+                <td>1. Hard Boiled Egg and Avocado Bowl<br>2. Scrambled Eggs with Onion Flakes</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/med/1473707_audreymoll_ab7fdcab-e2f0-4de2-a666-bdc6d28d1433.jpg" 
+                             alt="Hard Boiled Egg and Avocado Bowl" 
+                             onclick="openModal('Hard Boiled Egg and Avocado Bowl', '1. Boil eggs for 10 minutes, then cool and peel.<br>2. Slice avocado and eggs, then place in a bowl.<br>3. Sprinkle with salt, pepper, and drizzle with olive oil.')">
+                        
+                        <img src="https://images.eatthismuch.com/med/906179_tabitharwheeler_a525205c-6424-4dd6-b16f-4dafd7439492.jpg" 
+                             alt="Scrambled Eggs with Onion Flakes" 
+                             onclick="openModal('Scrambled Eggs with Onion Flakes', '1. Beat eggs with a pinch of salt and pepper.<br>2. Heat butter in a pan and sauté onion flakes until fragrant.<br>3. Pour in the eggs and stir continuously until cooked.')">
+                    </div>
+                </td>
+            </tr>
+    
+            <!-- Lunch -->
+            <tr>
+                <td>Lunch(480 calories)</td>
+                <td>1. Spicy Tuna Salad<br>2. Strawberry Coconut Milkshake</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/med/33600_JoeOcho_79b1bb1c-99ff-43b1-abe2-fe89c6167a61.png" 
+                             alt="Spicy Tuna Salad" 
+                             onclick="openModal('Spicy Tuna Salad', '1. Mix canned tuna with mayonnaise, sriracha, and diced celery.<br>2. Serve over a bed of lettuce or with whole grain crackers.')">
+                        
+                        <img src="https://images.eatthismuch.com/med/219159_scotjohns_c822a901-7689-4eb5-b686-2943314fd62f.png" 
+                             alt="Strawberry Coconut Milkshake" 
+                             onclick="openModal('Strawberry Coconut Milkshake', '1. Blend fresh strawberries with coconut milk and honey.<br>2. Add ice cubes and blend until smooth.<br>3. Serve chilled.')">
+                    </div>
+                </td>
+            </tr>
+    
+            <!-- Dinner -->
+            <tr>
+                <td>Dinner(650 calories)</td>
+                <td>1. Paleo Chicken Spinach Meatballs<br>2. Paleo Mediterranean Meatballs</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/med/255179_erin_m_fb314140-1062-488b-8def-78e98bbbc8f4.png" 
+                             alt="Paleo Chicken Spinach Meatballs" 
+                             onclick="openModal('Paleo Chicken Spinach Meatballs', '1. Mix ground chicken with spinach, garlic, and almond flour.<br>2. Form into meatballs and bake at 375°F for 20 minutes.<br>3. Serve with tomato sauce or over zucchini noodles.')">
+                        
+                        <img src="https://images.eatthismuch.com/med/264859_lupinesse_b9775139-6c67-4870-86fb-b9b244764644.png" 
+                             alt="Paleo Mediterranean Meatballs" 
+                             onclick="openModal('Paleo Mediterranean Meatballs', '1. Mix ground beef with diced onions, parsley, and cumin.<br>2. Shape into meatballs and pan-fry until browned.<br>3. Serve with tzatziki sauce and a side salad.')">
+                    </div>
+                </td>
+            </tr>
+            <!-- Snack -->
+<tr>
+    <td>Snack(220 calories)</td>
+    <td>Pumpkin Coconut Paleo Smoothie</td>
+    <td>
+        <img src="https://images.eatthismuch.com/med/255178_tabitharwheeler_b6752f31-8c72-4fcd-88d4-be04a3d45477.jpg" 
+             alt="Pumpkin Coconut Paleo Smoothie" 
+             onclick="openModal('Pumpkin Coconut Paleo Smoothie', '1. Blend pumpkin puree with coconut milk, cinnamon, and a dash of honey.<br>2. Add ice and blend until smooth.<br>3. Serve chilled.')">
+    </td>
+</tr>
+
+        </tbody>
+    </table>
+
+    <!-- Recipe Modal -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
+        </div>
+    </div>
+
+    <script>
+        function openModal(title, content) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('recipeModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('recipeModal').style.display = 'none';
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            var modal = document.getElementById('recipeModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+    </script>
+
+</body>
+</html>

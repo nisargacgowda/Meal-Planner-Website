@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Plan Table with Recipe Modal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .back-button:hover {
+            background-color: darkgreen;
+        }
+        h1 {
+            margin-top: 50px;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        img {
+            max-width: 250px;
+            height: auto;
+            border-radius: 8px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .image-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            text-align: left;
+            border-radius: 10px;
+            position: relative;
+        }
+        .close {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="back-button" onclick="goBack()">Back</button>
+    <h1>Meal Plan for the Day!</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Meal</th>
+                <th>Meal Name</th>
+                <th>Images</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Breakfast -->
+            <tr>
+                <td>Breakfast (400 calories)</td>
+                <td>1. Banana, Berries, and Bittersweet Chocolate Snack<br>2. Blueberry Almond Butter Protein Smoothie</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/med/906260_HayleyGehman_3ee3d561-5c53-4723-9722-3c990b811534.png" 
+                             alt="Banana, Berries, and Bittersweet Chocolate Snack" 
+                             onclick="openModal('Banana, Berries, and Bittersweet Chocolate Snack', '1. Slice banana and mix with berries.<br>2. Sprinkle dark chocolate shavings on top.<br>3. Serve fresh or chilled.')">
+                        
+                        <img src="https://images.eatthismuch.com/med/907012_tabitharwheeler_e05c03b7-0c51-439f-b1e8-9a9ea0cf8e87.jpg" 
+                             alt="Blueberry Almond Butter Protein Smoothie" 
+                             onclick="openModal('Blueberry Almond Butter Protein Smoothie', '1. Blend blueberries, almond butter, protein powder, and almond milk.<br>2. Add ice and blend until smooth.<br>3. Serve chilled.')">
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>Lunch (480 calories)</td>
+                <td>1. Vegan Chocolate Peanut Protein Shake<br>2. Vegan Tropical Protein Smoothie</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/med/254482_ldementhon_e2d697ab-8226-4f5a-9f76-5d2f205c166f.png" 
+                             alt="Vegan Chocolate Peanut Protein Shake" 
+                             onclick="openModal('Vegan Chocolate Peanut Protein Shake', '1. Blend almond milk, cocoa powder, peanut butter, banana, and protein powder.<br>2. Serve chilled.')">
+                        
+                        <img src="https://images.eatthismuch.com/med/254462_ldementhon_08d767f1-1e55-4d3d-80f5-c17e889f7d5b.png" 
+                             alt="Vegan Tropical Protein Smoothie" 
+                             onclick="openModal('Vegan Tropical Protein Smoothie', '1. Blend pineapple, mango, coconut milk, and protein powder.<br>2. Serve cold with ice.')">
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>Dinner (650 calories)</td>
+                <td>1. Spaghetti with Onion and Mushroom<br>2. Peanut Tofu</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/med/285765_aimilia_0c15a8d9-a3cb-4f76-b1ff-62d4e5c43a2b.png" 
+                             alt="Spaghetti with Onion and Mushroom" 
+                             onclick="openModal('Spaghetti with Onion and Mushroom', '1. Cook spaghetti until al dente.<br>2. Sauté onions and mushrooms in olive oil.<br>3. Mix with spaghetti and season with salt and pepper.')">
+                        
+                        <img src="https://images.eatthismuch.com/med/35160_eileenkay_1cc84d0b-6e21-4250-a947-a5e2b12b947d.jpeg" 
+                             alt="Peanut Tofu" 
+                             onclick="openModal('Peanut Tofu', '1. Cube tofu and pan-fry until golden.<br>2. Mix peanut butter, soy sauce, and garlic to make a sauce.<br>3. Toss the tofu in the sauce and serve.')">
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>Snack (220 calories)</td>
+                <td>Apple Sandwiches with Almond Butter & Granola</td>
+                <td>
+                    <img src="https://images.eatthismuch.com/med/331868_erin_m_4a155a40-8dfc-4edd-a23d-e1fef2f6cb7c.png" 
+                         alt="Apple Sandwiches with Almond Butter & Granola" 
+                         onclick="openModal('Apple Sandwiches with Almond Butter & Granola', '1. Core an apple and slice into rings.<br>2. Spread almond butter on one slice and sprinkle with granola.<br>3. Place another apple slice on top to make a sandwich.')">
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <!-- Recipe Modal -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
+        </div>
+    </div>
+
+    <script>
+        function openModal(title, content) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('recipeModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('recipeModal').style.display = 'none';
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            var modal = document.getElementById('recipeModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Plan Table with Recipe Modal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        img {
+            max-width: 250px;
+            height: auto;
+            border-radius: 8px;
+            margin: 5px;
+            cursor: pointer; /* Indicate that the image is clickable */
+        }
+        .image-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Back button and header styling */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .back-button {
+            font-size: 18px;
+            color: #fff;
+            background-color: #28a745; /* Green color */
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .back-button:hover {
+            background-color: #218838; /* Darker green when hovered */
+        }
+        .meal-title {
+            font-size: 24px;
+            text-align: center;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="#" class="back-button" onclick="window.history.back();">←Back</a>
+        <div class="meal-title">Meal Plan for the Day!</div>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Meal</th>
+                <th>Meal Name</th>
+                <th>Images</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Breakfast(294 calories)</td>
+                <td>1. Ham, Egg, and Spinach Roll-Ups<br>2. Microwave Poached Eggs</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/med/1467802_ashtonpienaar_5a91e69b-8c55-41ef-a502-7870844d0741.jpg" alt="Ham, Egg, and Spinach Roll-Ups" onclick="openModal('Ham, Egg, and Spinach Roll-Ups', '1. Lay out slices of ham.<br>2. Spread cooked spinach over the ham.<br>3. Place scrambled eggs on top.<br>4. Roll up and serve warm.')">
+                        <img src="https://images.eatthismuch.com/med/39219_tabitharwheeler_2b8f8e4b-ec63-41d2-beeb-40a5456d6815.jpg" alt="Microwave Poached Eggs" onclick="openModal('Microwave Poached Eggs', '1. Fill a mug with water and add a dash of vinegar.<br>2. Crack an egg into the water gently.<br>3. Microwave for about 60 seconds or until cooked.<br>4. Remove with a spoon and serve.')">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Lunch(352 calories)</td>
+                <td>1. Peach Mango Orange Smoothie<br>2. Tuna Stuffed Pepper</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/med/907083_tabitharwheeler_1cfd5c14-09af-43c0-ab70-b8862c9ec7a2.jpg" alt="Peach Mango Orange Smoothie" onclick="openModal('Peach Mango Orange Smoothie', '1. Blend fresh peach, mango, and orange juice.<br>2. Add yogurt or milk for creaminess.<br>3. Serve chilled in a glass.')">
+                        <img src="https://images.eatthismuch.com/med/3238296_PBnJammie_3d14c1ec-5c4a-44f3-85b2-1306136ed059.jpeg" alt="Tuna Stuffed Pepper" onclick="openModal('Tuna Stuffed Pepper', '1. Mix canned tuna with mayonnaise and spices.<br>2. Cut a bell pepper in half and remove seeds.<br>3. Stuff the pepper with the tuna mixture.<br>4. Serve chilled or warm.')">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Dinner(380 calories)</td>
+                <td>1. Summer Salad with Grilled Shrimp<br>2. Chicken, Spinach, and Strawberry Salad</td>
+                <td>
+                    <div class="image-group">
+                        <img src="https://images.eatthismuch.com/med/3224048_tabitharwheeler_dff90c62-ebe2-458c-b8a9-e7017772f10b.jpg" alt="Summer Salad with Grilled Shrimp" onclick="openModal('Summer Salad with Grilled Shrimp', '1. Grill shrimp with olive oil and garlic.<br>2. Toss with lettuce, tomatoes, and cucumbers.<br>3. Drizzle with lemon dressing and serve.')">
+                        <img src="https://images.eatthismuch.com/med/906146_tabitharwheeler_120b2c75-5375-4bb1-aef8-eb991353943b.jpg" alt="Chicken, Spinach, and Strawberry Salad" onclick="openModal('Chicken, Spinach, and Strawberry Salad', '1. Slice grilled chicken into strips.<br>2. Toss with fresh spinach and sliced strawberries.<br>3. Add a balsamic dressing and serve.')">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Snack(210 calories)</td>
+                <td>1. Banana, Almond Butter and Raisins</td>
+                <td>
+                    <img src="https://images.eatthismuch.com/med/55354_arjel.alcantara_e44c2c64-0383-4af5-9222-6977b9488657.jpg" alt="Banana, Almond Butter and Raisins" onclick="openModal('Banana, Almond Butter and Raisins', '1. Slice a banana into rounds.<br>2. Spread almond butter on each slice.<br>3. Sprinkle with raisins for extra flavor.<br>4. Serve immediately.')">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+
+    <!-- Modal -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Recipe Title</h2>
+            <p id="modalContent">Recipe details will appear here.</p>
+        </div>
+    </div>
+
+    <script>
+        function openModal(title, content) {
+            document.getElementById('modalTitle').innerHTML = title;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('recipeModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('recipeModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('recipeModal')) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
